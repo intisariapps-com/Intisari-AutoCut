@@ -1,13 +1,16 @@
-# ==========================================
-# 📄 FILE: manifest.txt (Machine-Readable)
-# 📅 Hari/Tanggal : Friday, 27 March 2026
-# ⏰ Waktu Backup : 20:24:27 WIB
-# ==========================================
-SYS_VER=6.9.1
-MOD_AUTH_VER=5.1.0
-MOD_DL_VER=2.6.0
-MOD_INST_VER=1.6.3
-MOD_PROC_VER=1.8.4
-MOD_SHEETS_VER=1.1.0
-MOD_UTILS_VER=1.0.0
-MOD_VIRAL_VER=3.2.1
+📄 MANIFEST UPDATE - VERSI 6.9
+📅 Tanggal Build  : 2026-04-04 17:15:46
+======================================================================
+NAMA FILE                                     | VERSI SAAT INI
+----------------------------------------------------------------------
+✅ main.sh                                     | 6.9.0 (Global Versioning Sync Patch)
+✅ manifest.txt                                | File Statis / Resource
+✅ modules/auth.sh                             | 5.1.0 (Strict Trial Enforcement & Security Fix)
+✅ modules/config.sh                           | 1.2.1 (Repository Migration & Variable Updates)
+✅ modules/downloader.sh                       | 2.6.0 (Core Engine Abstraction Patch)
+✅ modules/installer.sh                        | 1.6.5 (Auto-Install Flask API Engine)
+✅ modules/processor.sh                        | 1.8.3 (Fix: Unbound Variable $2 in Interactive Mode)
+✅ modules/sheets_report.sh                    | 1.1.0 (GAS Cloud Sync Adapter & Logging Implemented)
+✅ modules/utils.sh                            | 1.0.0
+✅ modules/viral_downloader.sh                 | 3.2.1 (Modular Pipeline: Offload to Processor API)
+======================================================================
