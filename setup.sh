@@ -4,7 +4,7 @@
 # ==============================================================================
 
 TARGET_DIR="$HOME/Intisari-AutoCut"
-REPO_URL="https://github.com/intisariapps/Intisari-AutoCut.git"
+REPO_URL="https://github.com/intisariapps-com/Intisari-AutoCut.git"
 
 # --- PROTOKOL FORENSIC LOGGING BASH ---
 log_term() {
