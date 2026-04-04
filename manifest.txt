@@ -1,17 +1,16 @@
 📄 MANIFEST UPDATE - VERSI 6.9
-📅 Tanggal Build  : 2026-04-04 18:59:42
+📅 Tanggal Build  : 2026-04-04 21:29:39
 ======================================================================
 NAMA FILE                                     | VERSI SAAT INI
 ----------------------------------------------------------------------
-✅ main.sh                                     | 6.9.4 (Update: Blueprint UI Web Modern & Hub Paradigm)
-✅ manifest.txt                                | File Statis / Resource
-✅ update-Sistem.py                            | update-Sistem.py
-✅ modules/auth.sh                             | 5.1.1 (Centralized SSOT Version Patch)
-✅ modules/config.sh                           | 1.2.2 (Dynamic Versioning & Log Patch)
-✅ modules/downloader.sh                       | 2.6.3 (Centralized SSOT & UX Loop Fix)
-✅ modules/installer.sh                        | 1.6.7 (Fix: Regex Collision & UI Symmetry Patch)
-✅ modules/processor.sh                        | 1.8.4 (Centralized SSOT Version & Syntax Patch)
-✅ modules/sheets_report.sh                    | 1.1.1 (Centralized SSOT Version & Fallback Patch)
-✅ modules/utils.sh                            | 1.0.1 (Centralized SSOT Version Patch)
-✅ modules/viral_downloader.sh                 | 3.2.2 (Centralized SSOT Version & Syntax Patch)
+main.sh | 6.9.4 (Update: Blueprint UI Web Modern & Hub Paradigm)
+manifest.txt | File Statis / Resource
+modules/auth.sh | 5.1.1 (Centralized SSOT Version Patch)
+modules/config.sh | 1.2.2 (Dynamic Versioning & Log Patch)
+modules/downloader.sh | 2.6.5
+modules/installer.sh | 2.0.0 (Core: V7 Dynamic Auto-Router Parser) (Fix: Regex Collision & UI Symmetry Patch)
+modules/processor.sh | 1.8.4 (Centralized SSOT Version & Syntax Patch)
+modules/sheets_report.sh | 1.1.1 (Centralized SSOT Version & Fallback Patch)
+modules/utils.sh | 1.0.1 (Centralized SSOT Version Patch)
+modules/viral_downloader.sh | 3.2.4 (Fix: Manual Input UI/UX Polishing) (Centralized SSOT Version & Syntax Patch)
 ======================================================================
