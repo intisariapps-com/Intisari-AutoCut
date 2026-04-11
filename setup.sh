@@ -1,12 +1,14 @@
 #!/bin/bash
 # ==============================================================================
-# ⚙️ VERSI: 1.3 - INTISARI BOOTSTRAPPER (AUTO-STORAGE & HEALING)
+# ⚙️ VERSI: 2.0 - INTISARI BOOTSTRAPPER (ATOMIC ZIP RELEASE & JSON PARSER)
 # ==============================================================================
 
 TARGET_DIR="$HOME/Intisari-AutoCut"
-REPO_URL="https://github.com/intisariapps-com/Intisari-AutoCut.git"
+TEMP_DIR="$HOME/.temp_intisari_install"
 
-# --- PROTOKOL FORENSIC LOGGING BASH ---
+# [AI: UBAH LINK INI DENGAN LINK RAW KE FILE version.json ANDA DI GITHUB]
+URL_VERSION_JSON="https://raw.githubusercontent.com/intisariapps-com/intisari-AutoCut/main/version.json"
+
 log_term() {
     local tag="$1"
     local msg="$2"
@@ -18,126 +20,130 @@ echo -e "\e[1;36m================================================\e[0m"
 echo -e "\e[1;37m      INTISARI AUTO-CUT ENTERPRISE INSTALLER    \e[0m"
 echo -e "\e[1;36m================================================\e[0m\n"
 
-log_term "INFO" "=== MEMULAI SIKLUS INSTALASI INTISARI-AUTOCUT ==="
+log_term "INFO" "Memulai Siklus Instalasi Berbasis Release ZIP."
 
-# 0. SETUP STORAGE PERMISSION (IZIN PENYIMPANAN PINTAR)
-log_term "INFO" "Memeriksa izin penyimpanan..."
-# Termux akan membuat folder ~/storage jika izin sudah diberikan.
+# 1. SETUP STORAGE & DEPENDENSI (Sama seperti V1.3, sangat solid)
 if [ ! -d "$HOME/storage" ]; then
-    echo -e "\e[1;33m[!] PERHATIAN: Sistem membutuhkan izin akses Galeri/Penyimpanan.\e[0m"
-    echo -e "Sebentar lagi akan muncul pop-up peringatan dari Android di layar Anda.\n"
-    echo -e "👉 Mohon klik \e[1;32m'IZINKAN' (ALLOW)\e[0m pada pop-up tersebut."
-    sleep 3
-    
-    # Memanggil API Android
+    echo -e "\e[1;33m[!] PERHATIAN: Sistem membutuhkan izin penyimpanan.\e[0m"
+    sleep 2
     termux-setup-storage
-    
-    echo -e "\n\e[1;36m[*] Jika Anda SUDAH menekan IZINKAN, tekan tombol ENTER di keyboard untuk melanjutkan...\e[0m"
-    read -p ""
-    log_term "SUCCESS" "Izin penyimpanan telah diminta dan dikonfirmasi pengguna."
-else
-    log_term "OK" "Izin penyimpanan sudah ada. Melanjutkan..."
+    read -p "👉 Jika sudah klik IZINKAN, tekan ENTER untuk lanjut..." dummy
 fi
 
-# 1. AUTO-HEALING & UPGRADE SISTEM TERMUX
-log_term "INFO" "Menyelaraskan pustaka inti Termux (Update & Upgrade)..."
-echo -e "\n\e[1;33m[*] Menyelaraskan sistem Termux Anda (Ini mungkin memakan waktu beberapa menit)...\e[0m"
-
-pkg clean > /dev/null 2>&1
-dpkg --configure -a > /dev/null 2>&1
-apt --fix-broken install -y > /dev/null 2>&1
+log_term "INFO" "Memeriksa dependensi dasar..."
 pkg update -y > /dev/null 2>&1
-yes | pkg upgrade -y > /dev/null 2>&1
-
-# 2. CEK DEPENDENSI DASAR (TERMASUK FFMPEG)
-log_term "INFO" "Memeriksa dependensi engine dasar (git, python, ffmpeg)..."
-if ! command -v git &> /dev/null || ! command -v python &> /dev/null || ! command -v ffmpeg &> /dev/null; then
-    log_term "INSTALL" "Dependensi tidak lengkap. Mengunduh via pkg..."
-    echo -e "\e[1;33m[*] Mengunduh mesin dasar (git, python, ffmpeg)...\e[0m"
-    pkg install git python ffmpeg -y > /dev/null 2>&1
-    log_term "SUCCESS" "Semua dependensi terpasang."
-else
-    log_term "OK" "Dependensi utama sudah siap."
+if ! command -v python &> /dev/null || ! command -v unzip &> /dev/null || ! command -v curl &> /dev/null; then
+    echo -e "\e[1;33m[*] Mengunduh utilitas ekstraksi (python, unzip, curl)...\e[0m"
+    pkg install python unzip curl -y > /dev/null 2>&1
 fi
 
-# 3. MEKANISME UNIQUE BACKUP JIKA FOLDER SUDAH ADA
-if [ -d "$TARGET_DIR" ]; then
-    BACKUP_NAME="${TARGET_DIR}_backup_$(date +%Y%m%d_%H%M%S)"
-    log_term "WARNING" "Direktori $TARGET_DIR sudah ada di sistem."
-    log_term "BACKUP" "Memindahkan folder lama ke cadangan unik: $BACKUP_NAME"
-    mv "$TARGET_DIR" "$BACKUP_NAME"
-fi
+# 2. FETCH JSON & PARSING (Menarik Data Rilis)
+echo -e "\e[1;34m[*] Menghubungkan ke Server Intisari...\e[0m"
+JSON_DATA=$(curl -sL --max-time 10 "$URL_VERSION_JSON")
 
-# 4. MENGUNDUH REPOSITORI TERENKRIPSI
-log_term "FETCH" "Mengkloning repositori terenkripsi dari GitHub..."
-echo -e "\e[1;34m[*] Mengunduh data dari server Intisari...\e[0m"
-if git clone "$REPO_URL" "$TARGET_DIR" > /dev/null 2>&1; then
-    log_term "SUCCESS" "Repositori berhasil dikloning ke $TARGET_DIR"
-else
-    log_term "ERROR" "Gagal mengkloning repositori. Periksa koneksi internet Anda."
-    echo -e "\e[1;31m[!] Gagal mengunduh data. Pastikan internet stabil.\e[0m"
+if [ -z "$JSON_DATA" ]; then
+    echo -e "\e[1;31m[!] FATAL: Gagal menghubungi server. Periksa koneksi internet.\e[0m"
+    log_term "ERROR" "Gagal mengunduh version.json"
     exit 1
 fi
 
-# 5. INJEKSI PYTHON DECRYPTOR ENGINE (ON-THE-FLY)
-DECRYPTOR_SCRIPT="$TARGET_DIR/.temp_decryptor.py"
-log_term "INFO" "Menyuntikkan Python Decryptor Engine ke dalam memori kerja..."
+# Parsing JSON menggunakan Python bawaan (Tanpa JQ agar lebih stabil)
+TARGET_VERSION=$(python -c "import sys, json; data=json.loads(sys.argv[1]); print(data.get('latest_version', ''))" "$JSON_DATA" 2>/dev/null)
+ZIP_URL=$(python -c "import sys, json; data=json.loads(sys.argv[1]); print(data.get('zip_url', ''))" "$JSON_DATA" 2>/dev/null)
 
+if [ -z "$ZIP_URL" ]; then
+    echo -e "\e[1;31m[!] FATAL: Format version.json rusak atau link ZIP tidak ditemukan.\e[0m"
+    exit 1
+fi
+
+log_term "INFO" "Rilis target ditemukan: v$TARGET_VERSION"
+echo -e "\e[1;32m[V] Ditemukan Rilis: v$TARGET_VERSION\e[0m"
+
+# 3. MENGUNDUH & MENGEKSTRAK KE KARANTINA
+rm -rf "$TEMP_DIR"
+mkdir -p "$TEMP_DIR"
+ZIP_FILE="$TEMP_DIR/release.zip"
+
+echo -e "\e[1;33m[*] Mengunduh paket sistem utama...\e[0m"
+if curl -L -o "$ZIP_FILE" "$ZIP_URL"; then
+    log_term "SUCCESS" "File ZIP berhasil diunduh ke karantina."
+else
+    echo -e "\e[1;31m[!] Gagal mengunduh file rilis ZIP.\e[0m"
+    rm -rf "$TEMP_DIR"
+    exit 1
+fi
+
+echo -e "\e[1;36m[*] Mengekstrak arsip...\e[0m"
+unzip -q "$ZIP_FILE" -d "$TEMP_DIR/extracted"
+rm -f "$ZIP_FILE"
+
+# 4. INJEKSI & EKSEKUSI PYTHON DECRYPTOR (DIPERKUAT)
+DECRYPTOR_SCRIPT="$TEMP_DIR/decrypt_engine.py"
 cat << 'EOF' > "$DECRYPTOR_SCRIPT"
 import os, sys, base64, zlib, logging
 
 TARGET_DIR = sys.argv[1]
-
-logging.basicConfig(
-    level=logging.DEBUG,
-    format='[%(asctime)s] [%(levelname)s] - %(message)s',
-    datefmt='%Y-%m-%d %H:%M:%S',
-    handlers=[logging.StreamHandler(sys.stdout)]
-)
+logging.basicConfig(level=logging.INFO, format='[%(levelname)s] %(message)s')
 
 def decrypt_file(filepath):
     try:
         with open(filepath, 'rb') as f:
             header = f.readline()
             if b'# INTISARI-ENCRYPTED-V1' not in header:
-                return # Skip file yang tidak terenkripsi
+                return True
             encrypted_data = f.read()
         
         decompressed = zlib.decompress(base64.b64decode(encrypted_data))
-        
         with open(filepath, 'wb') as f:
             f.write(decompressed)
+        return True
     except Exception as e:
-        pass
+        logging.error("Gagal dekripsi pada: " + filepath + " | Error: " + str(e))
+        return False
 
 def main():
+    success_all = True
     for root, dirs, files in os.walk(TARGET_DIR):
-        if '.git' in dirs:
-            dirs.remove('.git')
         for file in files:
-            if file == ".temp_decryptor.py":
-                continue
-            decrypt_file(os.path.join(root, file))
+            full_path = os.path.join(root, file)
+            if not decrypt_file(full_path):
+                success_all = False
+    
+    if not success_all:
+        sys.exit(1)
 
 if __name__ == "__main__":
     main()
 EOF
 
-# 6. EKSEKUSI DEKRIPSI LOKAL
-log_term "INFO" "Menjalankan proses dekripsi secara sekuensial..."
-echo -e "\e[1;36m[*] Membangun ulang struktur kode (Dekripsi)...\e[0m"
-python "$DECRYPTOR_SCRIPT" "$TARGET_DIR" > /dev/null 2>&1
+echo -e "\e[1;34m[*] Membangun ulang struktur kode (Dekripsi Absolut)...\e[0m"
+if python "$DECRYPTOR_SCRIPT" "$TEMP_DIR/extracted"; then
+    log_term "SUCCESS" "Dekripsi berhasil 100%."
+else
+    echo -e "\e[1;31m[!] FATAL: File sistem corrupt saat dekripsi. Instalasi dibatalkan untuk melindungi sistem Anda.\e[0m"
+    rm -rf "$TEMP_DIR"
+    exit 1
+fi
 
-# 7. POST-INSTALL CLEANUP & SETUP PERMISSION
-log_term "INFO" "Membersihkan jejak Decryptor Engine (Self-Destruct)..."
-rm -f "$DECRYPTOR_SCRIPT"
+# 5. ATOMIC SWAP (TUKAR FOLDER) & CLEANUP
+if [ -d "$TARGET_DIR" ]; then
+    BACKUP_NAME="${TARGET_DIR}_backup_$(date +%Y%m%d_%H%M%S)"
+    mv "$TARGET_DIR" "$BACKUP_NAME"
+    log_term "INFO" "Sistem lama diamankan ke $BACKUP_NAME"
+fi
 
-log_term "INFO" "Mengatur izin eksekusi (+x) pada modul utama bash..."
+# Mencari folder utama di dalam hasil ekstrak (mengatasi jika zip dibungkus dengan parent folder)
+EXTRACTED_ROOT=$(find "$TEMP_DIR/extracted" -mindepth 1 -maxdepth 1 -type d | head -n 1)
+if [ -z "$EXTRACTED_ROOT" ]; then
+    EXTRACTED_ROOT="$TEMP_DIR/extracted"
+fi
+
+mv "$EXTRACTED_ROOT" "$TARGET_DIR"
+rm -rf "$TEMP_DIR"
+
 find "$TARGET_DIR" -type f -name "*.sh" -exec chmod +x {} \;
 
-log_term "SUCCESS" "=== INSTALASI INTISARI-AUTOCUT BERHASIL ==="
-echo ""
-echo -e "\e[1;32m[V] Sistem telah berhasil didekripsi dan siap digunakan!\e[0m"
-echo -e "Silakan ketik perintah di bawah ini untuk memulai:"
-echo -e "\e[1;36mcd ~/Intisari-AutoCut && bash main.sh\e[0m"
-echo ""
+log_term "SUCCESS" "Instalasi Atomic ZIP selesai."
+echo -e "\n\e[1;32m[V] INSTALASI BERHASIL! (Versi: $TARGET_VERSION)\e[0m"
+echo -e "Ketik perintah di bawah untuk memulai:"
+echo -e "\e[1;36mcd ~/Intisari-AutoCut && bash main.sh\e[0m\n"
