@@ -154,5 +154,5 @@ find "$TARGET_DIR" -type f -name "*.sh" -exec chmod +x {} \;
 
 log_term "SUCCESS" "Instalasi Atomic ZIP selesai."
 echo -e "\n\e[1;32m[V] INSTALASI BERHASIL! (Versi: $TARGET_VERSION)\e[0m"
-echo -e "Ketik perintah di bawah untuk memulai:"
+echo -e "Copy Teks diBawah Paste Enter! Menjalakan Sistem:"
 echo -e "\e[1;36mcd ~/Intisari-AutoCut && bash main.sh\e[0m\n"
