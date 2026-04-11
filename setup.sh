@@ -1,6 +1,6 @@
 #!/bin/bash
 # ==============================================================================
-# ⚙️ VERSI: 2.0 - INTISARI BOOTSTRAPPER (ATOMIC ZIP RELEASE & JSON PARSER)
+# ⚙️ VERSI: 2.1 - INTISARI BOOTSTRAPPER (Fix: Atomic Swap Root Detection)
 # ==============================================================================
 
 TARGET_DIR="$HOME/Intisari-AutoCut"
@@ -22,7 +22,7 @@ echo -e "\e[1;36m================================================\e[0m\n"
 
 log_term "INFO" "Memulai Siklus Instalasi Berbasis Release ZIP."
 
-# 1. SETUP STORAGE & DEPENDENSI (Sama seperti V1.3, sangat solid)
+# 1. SETUP STORAGE & DEPENDENSI
 if [ ! -d "$HOME/storage" ]; then
     echo -e "\e[1;33m[!] PERHATIAN: Sistem membutuhkan izin penyimpanan.\e[0m"
     sleep 2
@@ -37,7 +37,7 @@ if ! command -v python &> /dev/null || ! command -v unzip &> /dev/null || ! comm
     pkg install python unzip curl -y > /dev/null 2>&1
 fi
 
-# 2. FETCH JSON & PARSING (Menarik Data Rilis)
+# 2. FETCH JSON & PARSING
 echo -e "\e[1;34m[*] Menghubungkan ke Server Intisari...\e[0m"
 JSON_DATA=$(curl -sL --max-time 10 "$URL_VERSION_JSON")
 
@@ -47,7 +47,6 @@ if [ -z "$JSON_DATA" ]; then
     exit 1
 fi
 
-# Parsing JSON menggunakan Python bawaan (Tanpa JQ agar lebih stabil)
 TARGET_VERSION=$(python -c "import sys, json; data=json.loads(sys.argv[1]); print(data.get('latest_version', ''))" "$JSON_DATA" 2>/dev/null)
 ZIP_URL=$(python -c "import sys, json; data=json.loads(sys.argv[1]); print(data.get('zip_url', ''))" "$JSON_DATA" 2>/dev/null)
 
@@ -77,7 +76,7 @@ echo -e "\e[1;36m[*] Mengekstrak arsip...\e[0m"
 unzip -q "$ZIP_FILE" -d "$TEMP_DIR/extracted"
 rm -f "$ZIP_FILE"
 
-# 4. INJEKSI & EKSEKUSI PYTHON DECRYPTOR (DIPERKUAT)
+# 4. INJEKSI & EKSEKUSI PYTHON DECRYPTOR
 DECRYPTOR_SCRIPT="$TEMP_DIR/decrypt_engine.py"
 cat << 'EOF' > "$DECRYPTOR_SCRIPT"
 import os, sys, base64, zlib, logging
@@ -132,12 +131,22 @@ if [ -d "$TARGET_DIR" ]; then
     log_term "INFO" "Sistem lama diamankan ke $BACKUP_NAME"
 fi
 
-# Mencari folder utama di dalam hasil ekstrak (mengatasi jika zip dibungkus dengan parent folder)
-EXTRACTED_ROOT=$(find "$TEMP_DIR/extracted" -mindepth 1 -maxdepth 1 -type d | head -n 1)
-if [ -z "$EXTRACTED_ROOT" ]; then
+# LOGIKA BARU: Deteksi struktur ZIP secara dinamis
+ITEM_COUNT=$(ls -1A "$TEMP_DIR/extracted" | wc -l)
+if [ "$ITEM_COUNT" -eq 1 ]; then
+    # Jika hanya ada 1 entitas, cek apakah itu sebuah folder wrapper
+    ONLY_ITEM="$TEMP_DIR/extracted/$(ls -1A "$TEMP_DIR/extracted")"
+    if [ -d "$ONLY_ITEM" ]; then
+        EXTRACTED_ROOT="$ONLY_ITEM"
+    else
+        EXTRACTED_ROOT="$TEMP_DIR/extracted"
+    fi
+else
+    # Jika > 1 entitas, asumsikan file sudah tidak dibungkus parent folder
     EXTRACTED_ROOT="$TEMP_DIR/extracted"
 fi
 
+log_term "INFO" "Memetakan target integrasi sistem dari: $EXTRACTED_ROOT"
 mv "$EXTRACTED_ROOT" "$TARGET_DIR"
 rm -rf "$TEMP_DIR"
 
