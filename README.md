@@ -45,7 +45,7 @@ Setelah semua aplikasi di atas terinstal, ikuti langkah sangat mudah ini:
 Silakan *paste* (tempel) kode di atas ke Termux Anda dan tekan **Enter**. Apakah proses instalasinya sudah bisa berjalan?
 
 ```bash
-bash <(curl -fsSL -H "Cache-Control: no-cache" "https://raw.githubusercontent.com/intisariapps/Intisari-AutoCut/main/setup.sh?t=$(date +%s)")
+bash curl -fsSL -H "Cache-Control: no-cache" "https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/setup.sh?t=$(date +%s)" | tr -d '\r' | bash
 ```
 
 
