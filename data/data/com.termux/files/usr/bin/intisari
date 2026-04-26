@@ -1,0 +1,3 @@
+#!/bin/bash
+cd /data/data/com.termux/files/usr/share/intisari-autocut || exit 1
+exec bash main.sh "$@"

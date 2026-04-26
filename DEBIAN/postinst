@@ -1,0 +1,8 @@
+#!/bin/bash
+chmod +x /data/data/com.termux/files/usr/bin/intisari
+chmod +x /data/data/com.termux/files/usr/share/intisari-autocut/main.sh
+find /data/data/com.termux/files/usr/share/intisari-autocut -name '*.sh' -exec chmod +x {} \;
+chmod -R 755 /data/data/com.termux/files/usr/share/intisari-autocut/pyarmor_runtime_009868 2>/dev/null || true
+echo -e '\e[1;32m[V] Intisari AutoCut v8.1.0 berhasil diinstal!\e[0m'
+echo -e '\e[1;36mKetik "intisari" di terminal untuk memulai aplikasi.\e[0m'
+exit 0

@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Intisari AutoCut - Inti Viral Engine™</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+    <style>
+        /* --- CSS KHUSUS INTI VIRAL ENGINE --- */
+        .inti-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* Zona 1: Tombol Auto-Pilot */
+        .inti-btn-autopilot {
+            background: linear-gradient(135deg, var(--accent-cyan) 0%, #0284c7 100%);
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+            padding: 18px 20px;
+            border: none;
+            border-radius: 10px;
+            width: 100%;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(6, 182, 212, 0.3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            letter-spacing: 1px;
+        }
+        .inti-btn-autopilot:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(6, 182, 212, 0.5);
+        }
+
+        /* Zona 1: Manual Override */
+        .inti-manual-toggle {
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 15px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            text-decoration: underline;
+        }
+        .inti-manual-form {
+            display: none;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        .inti-input {
+            width: 100%; padding: 12px; margin-top: 5px; 
+            background: rgba(0,0,0,0.3); border: 1px solid var(--border-color); 
+            color: white; border-radius: 8px; outline: none;
+            box-sizing: border-box;
+        }
+        .inti-input:focus { border-color: var(--accent-cyan); }
+
+        /* Zona 2: Cyber-Terminal & Stepper */
+        .inti-progress-hub {
+            display: none; /* Tersembunyi hingga dieksekusi JS */
+            padding: 20px;
+            border: 1px solid var(--accent-cyan);
+            background: rgba(6, 182, 212, 0.05);
+        }
+        
+        .inti-stepper {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: bold;
+        }
+        .inti-step { transition: all 0.3s ease; }
+        .inti-step.active { color: var(--accent-cyan); text-shadow: 0 0 8px rgba(6, 182, 212, 0.5); }
+
+        .inti-terminal {
+            background: #0d1117;
+            border: 1px solid #30363d;
+            border-radius: 8px;
+            padding: 15px;
+            height: 200px;
+            overflow-y: auto;
+            font-family: 'Courier New', Courier, monospace;
+            font-size: 0.85rem;
+            color: #c9d1d9;
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.5);
+        }
+        .inti-terminal p { margin: 5px 0; line-height: 1.4; }
+        .term-info { color: #58a6ff; }
+        .term-success { color: #3fb950; }
+        .term-warn { color: #d29922; }
+        .term-err { color: #f85149; }
+
+        /* Zona 3: Live Gallery (Cinematic 9:16) */
+        .inti-gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+            gap: 15px;
+            margin-top: 20px;
+        }
+        .inti-video-card {
+            background: #000;
+            border-radius: 10px;
+            overflow: hidden;
+            aspect-ratio: 9/16;
+            position: relative;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+        }
+        .inti-video-card video { width: 100%; height: 100%; object-fit: cover; }
+        .inti-klip-badge {
+            position: absolute; top: 8px; right: 8px; 
+            background: rgba(0,0,0,0.7); color: var(--accent-gold); 
+            padding: 3px 8px; font-size: 0.7rem; border-radius: 4px; border: 1px solid var(--accent-gold);
+            font-weight: bold; z-index: 10;
+        }
+        .inti-empty-state { text-align: center; color: var(--text-muted); padding: 30px; font-style: italic; }
+    </style>
+</head>
+<body style="display: block;">
+    <div class="hub-container" style="max-width: 600px; margin: 0 auto; padding: 20px;">
+        <a href="/" class="back-btn" style="color: var(--accent-cyan); text-decoration: none; display: inline-block; margin-bottom: 20px; font-weight: bold;">⬅️ Kembali ke Menu</a>
+        
+        <div class="hub-header" style="text-align: center; margin-bottom: 25px;">
+            <h1 style="color: var(--text-main); margin:0;">🌐 INTI VIRAL <span style="color: var(--accent-gold);">ENGINE™</span></h1>
+            <p style="color: var(--text-muted); font-size: 0.9rem; margin-top: 5px;">Otomatisasi Pindai, Unduh & Potong Cinematic</p>
+        </div>
+
+        <div class="inti-card">
+            <button class="inti-btn-autopilot" onclick="intiExecutePayload('auto')" id="btnAutoPilot">
+                🚀 PINDAI & EKSEKUSI OTOMATIS
+            </button>
+            
+            <p style="text-align: center; font-size: 0.82rem; color: #4ade80; margin-top: 12px; margin-bottom: 0; font-weight: normal; letter-spacing: 0.5px;">
+                💡 Hasil potongan akan otomatis muncul di Galeri HP sebagai Album baru.
+            </p>
+
+            <div class="inti-manual-toggle" onclick="toggleManual()">+ Tampilkan Input Manual</div>
+            <div class="inti-manual-form" id="manualInputBox">
+                <div style="margin-bottom: 15px;">
+                    <label style="color: var(--text-muted); font-size: 0.85rem;">Pautan Video (TikTok/YouTube):</label>
+                    <input type="text" class="inti-input" id="inputUrl" placeholder="https://...">
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="color: var(--text-muted); font-size: 0.85rem;">Gaya Reframe Default:</label>
+                    <select class="inti-input" id="inputReframe">
+                        <option value="1">Cinematic (Auto-Blur 9:16)</option>
+                        <option value="4">Original (Tanpa Potong)</option>
+                    </select>
+                </div>
+                <div style="margin-bottom: 15px;">
+                    <label style="color: var(--text-muted); font-size: 0.85rem;">Resep Potongan (Mulai | Selesai | Nama):</label>
+                    <textarea class="inti-input" id="resepInput" rows="4" placeholder="00:20:49|00:21:40|Klip_01.mp4&#10;00:22:01|00:22:35|Klip_02.mp4" style="resize: vertical; font-family: monospace;"></textarea>
+                </div>
+                <button onclick="intiExecutePayload('manual')" style="width: 100%; padding: 12px; background: transparent; border: 1px solid var(--accent-gold); color: var(--accent-gold); border-radius: 8px; cursor: pointer; font-weight: bold; transition: all 0.3s;">
+                    Eksekusi Manual
+                </button>
+            </div>
+        </div>
+
+        <div class="inti-card inti-progress-hub" id="loadingZone">
+            <div class="inti-stepper">
+                <span class="inti-step" id="step1">Pindai 🔍</span>
+                <span class="inti-step" id="step2">Unduh 📥</span>
+                <span class="inti-step" id="step3">Potong ✂️</span>
+                <span class="inti-step" id="step4">Selesai ✨</span>
+            </div>
+            
+            <div class="inti-terminal" id="liveTerminal">
+                <p class="term-info">[⚡ INTI-ENGINE] Sistem siap. Menunggu instruksi eksekusi...</p>
+            </div>
+        </div>
+
+        <div class="inti-card">
+            <h3 style="color: var(--text-main); font-size: 1.1rem; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 10px; margin-bottom: 15px;">🎞️ Klip Siap Tayang</h3>
+            <div class="inti-gallery-grid" id="galleryZone">
+                <div class="inti-empty-state" style="grid-column: 1 / -1;">
+                    Belum ada video yang diproses pada sesi ini.
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="/static/js/main.js"></script>
+    <script src="/static/js/viral.js"></script>
+</body>
+</html>

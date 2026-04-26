@@ -1,0 +1,8 @@
+Package: intisari-autocut
+Version: 8.1.0
+Architecture: all
+Maintainer: Intisari Cops <admin@intisariapps.com>
+Depends: bash, python, curl, ffmpeg, jq, ncurses-utils, nodejs-lts, ruby
+Description: Intisari AutoCut Professional System
+ Sistem otomasi potong video pintar untuk Termux.
+ Mendukung integrasi GAS, GUI Web, dan Anti-OOM.
