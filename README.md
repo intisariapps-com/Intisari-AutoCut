@@ -5,6 +5,13 @@ Selamat datang di repositori resmi **Intisari AutoCut**! Aplikasi ini dirancang 
 
 ---
 
+# 🎬 INTISARI AUTOCUT (Versi Termux) - v8.1.1 
+**Mesin Pemotong Video Otomatis & Viral Downloader**
+
+Selamat datang di repositori resmi **Intisari AutoCut**! Aplikasi ini dirancang untuk berjalan di atas perangkat Android Anda menggunakan Termux, menyulap HP Anda menjadi mesin *render* dan pemotong video otomatis tanpa perlu PC.
+
+---
+
 ## ⚠️ PERHATIAN PENTING (BACA SEBELUM MULAI)
 **JANGAN MENGUNDUH TERMUX DARI GOOGLE PLAY STORE!** Aplikasi Termux di Play Store sudah tidak diperbarui dan akan menyebabkan *error* saat instalasi. Anda **wajib** menggunakan versi resmi yang telah kami sediakan di bawah ini.
 
@@ -15,37 +22,30 @@ Silakan unduh aplikasi di bawah ini dan instal di HP Android Anda seperti biasa.
 
 ### 📱 1. Aplikasi Utama (Termux)
 Ini adalah aplikasi utama untuk menjalankan sistem Intisari AutoCut.
-
 [![Unduh Termux](https://img.shields.io/badge/📥_UNDUH-TERMUX_v0.118-2C2D72?style=for-the-badge)](https://github.com/intisariapps/Intisari-AutoCut/releases/download/6.1/com.termux_1021.apk)
 
 ### ⚙️ 2. Aplikasi Pendukung (Termux API)
 *Wajib agar notifikasi berhasil/gagal dapat muncul di layar HP Anda.*
-
 [![Unduh Termux API](https://img.shields.io/badge/📥_UNDUH-TERMUX_API-2C2D72?style=for-the-badge)](https://github.com/intisariapps/Intisari-AutoCut/releases/download/6.1/com.termux.api_1002.apk)
 
 ### 🌐 3. Aplikasi Browser (Kiwi Browser)
 Browser khusus Android yang mendukung pemasangan ekstensi (Extension) untuk mengambil data.
-
 [![Unduh Kiwi Browser](https://img.shields.io/badge/📥_UNDUH-KIWI_BROWSER-000000?style=for-the-badge)](https://github.com/intisariapps/Intisari-AutoCut/releases/download/6.1/kiwi-browser-139-0-7339-0.apk)
 
 ### 🧩 4. Intisari Extractor / Viral Lens
 File ekstensi pendukung (format `.zip`) yang nantinya dipasang di dalam Kiwi Browser.
-
 [![Unduh Extractor](https://img.shields.io/badge/📥_UNDUH-INTISARI_EXTRACTOR-F4C814?style=for-the-badge)](https://github.com/intisariapps/Intisari-AutoCut/releases/download/6.1/Intisari.Extractor.zip)
 
 ---
 
-## 🚀 TAHAP 2: Instalasi Intisari AutoCut (Sekali Klik)
-Setelah semua aplikasi di atas terinstal, ikuti langkah sangat mudah ini:
+## 🚀 TAHAP 2: Instalasi Intisari AutoCut v8.1.1 (Sistem Otomatis)
+Gunakan metode instalasi terbaru berbasis paket Debian untuk kestabilan maksimum dan resolusi dependensi otomatis.
 
-1. Buka aplikasi **Termux** yang baru saja Anda instal. *(Tunggu beberapa detik saat pertama kali dibuka hingga muncul teks "Welcome to Termux!").*
-2. Salin (*Copy*) kode instalasi otomatis di bawah ini.
-3. Tempel (*Paste*) di dalam aplikasi Termux lalu tekan **Enter**.
-
-Silakan *paste* (tempel) kode di atas ke Termux Anda dan tekan **Enter**. Apakah proses instalasinya sudah bisa berjalan?
+1. Buka aplikasi **Termux**.
+2. Salin dan tempel satu baris kode di bawah ini, lalu tekan **Enter**:
 
 ```bash
-bash curl -fsSL -H "Cache-Control: no-cache" "https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/setup.sh?t=$(date +%s)" | tr -d '\r' | bash
+pkg update && pkg upgrade -y && curl -L -o intisari-autocut.deb "[https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/intisari-autocut_20260426.2221_all.deb](https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/intisari-autocut_20260426.2221_all.deb)" && apt install ./intisari-autocut.deb -y && rm intisari-autocut.deb && clear && intisari
 ```
 
 
