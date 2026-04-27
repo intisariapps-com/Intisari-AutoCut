@@ -53,7 +53,7 @@ pkg update -y && pkg install curl -y && curl -sL https://raw.githubusercontent.c
 **Tujuan:** Panduan khusus untuk pemula yang belum pernah memakai Termux sama sekali.
 
 <p align="left">
-  <a href="https://youtu.be/ANIab701jhM">
+  <a href="https://youtu.be/kp3BpuPZwaw">
     <img src="https://img.youtube.com/vi/ANIab701jhM/hqdefault.jpg" width="200" alt="Tutorial Part 1">
   </a>
   &nbsp; &nbsp;
