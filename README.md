@@ -45,7 +45,7 @@ Gunakan metode instalasi terbaru berbasis paket Debian untuk kestabilan maksimum
 2. Salin dan tempel satu baris kode di bawah ini, lalu tekan **Enter**:
 
 ```bash
-pkg update && pkg upgrade -y && curl -L -o intisari-autocut.deb "[https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/intisari-autocut_20260426.2221_all.deb](https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/intisari-autocut_20260426.2221_all.deb)" && apt install ./intisari-autocut.deb -y && rm intisari-autocut.deb && clear && intisari
+pkg update -y && pkg install curl -y && curl -sL https://raw.githubusercontent.com/intisariapps-com/Intisari-AutoCut/main/install.sh | bash
 ```
 
 
