@@ -6,8 +6,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 echo "[*] Mengatur Mirror Termux otomatis..."
-mkdir -p ~/.termux
-echo "deb https://termux.dev/apt/termux-main stable main" > ~/.termux/apt-sources.list
+echo "deb https://termux.dev/apt/termux-main stable main" > $PREFIX/etc/apt/sources.list
 
 echo "[*] Membersihkan cache APT..."
 apt clean
@@ -76,4 +75,8 @@ echo "✅ INSTALASI SELESAI!"
 echo "Silakan restart Termux atau ketik 'intisari menu'."
 echo "========================================================="
 
-intisari menu
+if command -v intisari &>/dev/null; then
+    intisari menu
+else
+    echo "[!] WARN: Perintah 'intisari' belum tersedia. Silakan restart Termux."
+fi

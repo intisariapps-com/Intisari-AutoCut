@@ -1,0 +1,20 @@
+# Claude Code Workflow — Do NOT expose to public repo
+memory/
+.claude/
+docs/srs/
+plans/
+CLAUDE.md
+CLAUDE_TEMPLATE.md
+ONBOARDING.md
+ADAPTATION_GUIDE.md
+Agent.md
+
+# Context-mode configs (local only, not for team)
+.vscode/
+.github/hooks/
+
+# Local files
+*.local
+*.tmp
+.env
+.env.local
