@@ -7,7 +7,7 @@ export DEBIAN_FRONTEND=noninteractive
 
 echo "[*] Mengatur Mirror Termux otomatis..."
 mkdir -p ~/.termux
-echo "deb https://mirrors.aliyun.com/termux/termux-main stable main" > ~/.termux/apt-sources.list
+echo "deb https://termux.dev/apt/termux-main stable main" > ~/.termux/apt-sources.list
 
 echo "[*] Membersihkan cache APT..."
 apt clean
@@ -17,8 +17,18 @@ echo "[*] Mengoptimalkan sistem Termux..."
 apt update -y || apt update -y --fix-missing
 apt upgrade -y -o Dpkg::Options::="--force-confold" || true
 
+echo "[*] Memperbaiki library linking issues..."
+apt install --reinstall libngtcp2 libnghttp3 libcurl -y --no-install-recommends || true
+
 echo "[*] Mengunduh paket aplikasi..."
 apt install wget -y --no-install-recommends
+
+echo "[*] Verifikasi curl berfungsi..."
+if ! curl --version > /dev/null 2>&1; then
+    echo "[!] WARN: curl linking error detected, memperbaiki..."
+    apt install --reinstall curl -y --no-install-recommends || true
+    dpkg --configure -a
+fi
 
 echo "[*] Download deb installer..."
 if ! wget -q -O intisari-latest.deb https://autocutdeb.intisariapps.com/intisari-autocut-latest.deb; then
@@ -36,9 +46,14 @@ echo "[V] Download berhasil"
 echo "[*] Melakukan instalasi mesin..."
 if ! apt install ./intisari-latest.deb -y; then
     echo "[!] ERROR: Instalasi deb gagal!"
-    echo "[*] Trying with --fix-missing..."
+    echo "[*] Attempting library fixes..."
+    dpkg --configure -a
     apt install --fix-missing -y
-    apt install ./intisari-latest.deb -y
+    apt install --fix-broken -y
+    if ! apt install ./intisari-latest.deb -y; then
+        echo "[!] ERROR: Instalasi deb gagal setelah recovery!"
+        exit 1
+    fi
 fi
 rm -f intisari-latest.deb
 
