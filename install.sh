@@ -6,7 +6,7 @@
 export DEBIAN_FRONTEND=noninteractive
 
 echo "[*] Mengatur Mirror Termux otomatis..."
-echo "deb https://termux.dev/apt/termux-main stable main" > $PREFIX/etc/apt/sources.list
+echo "deb https://packages-cf.termux.dev/apt/termux-main stable main" > $PREFIX/etc/apt/sources.list
 
 echo "[*] Membersihkan cache APT..."
 apt clean
