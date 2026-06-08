@@ -3,6 +3,14 @@
 # INTISARI AUTOCUT - AUTO INSTALLER VIP
 # =========================================================
 
+# Minta izin penyimpanan terlebih dahulu agar pop-up Android muncul secara interaktif
+if [ ! -d "$HOME/storage" ]; then
+    echo "[*] Meminta izin akses penyimpanan Android..."
+    echo "[!] Silakan PILIH 'ALLOW' / 'IZINKAN' pada layar HP Anda."
+    termux-setup-storage
+    sleep 3
+fi
+
 export DEBIAN_FRONTEND=noninteractive
 
 echo "[*] Mengatur Mirror Termux otomatis..."
