@@ -5,7 +5,7 @@ Selamat datang di repositori resmi **Intisari AutoCut**! Aplikasi ini dirancang 
 
 ---
 
-# 🎬 INTISARI AUTOCUT (Versi Termux) - v8.1.1 
+# 🎬 INTISARI AUTOCUT (Versi Termux) - v10.0.0 
 **Mesin Pemotong Video Otomatis & Viral Downloader**
 
 Selamat datang di repositori resmi **Intisari AutoCut**! Aplikasi ini dirancang untuk berjalan di atas perangkat Android Anda menggunakan Termux, menyulap HP Anda menjadi mesin *render* dan pemotong video otomatis tanpa perlu PC.
@@ -38,7 +38,7 @@ File ekstensi pendukung (format `.zip`) yang nantinya dipasang di dalam Kiwi Bro
 
 ---
 
-## 🚀 TAHAP 2: Instalasi Intisari AutoCut v8.1.1 (Sistem Otomatis)
+## 🚀 TAHAP 2: Instalasi Intisari AutoCut v10.0.0 (Sistem Otomatis)
 Gunakan metode instalasi terbaru berbasis paket Debian untuk kestabilan maksimum dan resolusi dependensi otomatis.
 
 1. Buka aplikasi **Termux**.
@@ -68,7 +68,7 @@ pkg update -y && pkg install wget -y && wget -O install.sh https://raw.githubuse
 * Cara mengunduh Termux yang benar (Wajib dari link di atas, **bukan** PlayStore).
 * Cara *Copy-Paste* Skrip Setup 1 Baris ke dalam Termux.
 * Memberikan izin akses penyimpanan/Galeri dengan aman.
-* Cara membuka aplikasi menggunakan perintah: `cd ~/Intisari-AutoCut && bash main.sh`
+* Cara membuka aplikasi menggunakan perintah global: `intisari menu` atau `intisari start`
 
 ### ⬇️ BAB 2: Cara Mengunduh Video (YouTube & Sosmed)
 **Tujuan:** Membuktikan kecepatan unduh aplikasi dari berbagai platform.
