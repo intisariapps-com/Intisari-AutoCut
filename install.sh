@@ -51,13 +51,13 @@ fi
 echo "[V] Download berhasil"
 
 echo "[*] Melakukan instalasi mesin..."
-if ! apt install ./intisari-latest.deb -y; then
+if ! apt install ./intisari-latest.deb -y --allow-downgrades; then
     echo "[!] ERROR: Instalasi deb gagal!"
     echo "[*] Attempting library fixes..."
     dpkg --configure -a
     apt install --fix-missing -y
     apt install --fix-broken -y
-    if ! apt install ./intisari-latest.deb -y; then
+    if ! apt install ./intisari-latest.deb -y --allow-downgrades; then
         echo "[!] ERROR: Instalasi deb gagal setelah recovery!"
         exit 1
     fi
