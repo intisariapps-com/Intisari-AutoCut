@@ -108,6 +108,9 @@ pkg update -y && pkg install wget -y && wget -O install.sh https://raw.githubuse
   <img src="https://img.youtube.com/vi/_1sAInXyiYU/hqdefault.jpg" width="300" alt="Gemini Custom Analysis">
 </a>
 
+#### 🔗 AKSES PINTAS CEPAT:
+[![Akses Gemini Custom](https://img.shields.io/badge/🤖_AKSES-GEMINI_CUSTOM_V2-8871FF?style=for-the-badge&logo=google-gemini&logoColor=white)](https://gemini.google.com/gem/1on4dsBC62Q2chNbsU5GQZj8I5oWMoMXa?usp=sharing)
+
 * Cara memasukkan link YouTube dan menulis perintah *prompt* wajib di Gemini.
 * Mengunduh file resep `.txt` segmentasi hasil dari AI ke folder Download HP.
 
