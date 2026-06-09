@@ -51,79 +51,52 @@ pkg update -y && pkg install wget -y && wget -O install.sh https://raw.githubuse
 3. **Tunggu hingga selesai** (jangan tekan Ctrl+C di tengah proses).
 4. Aplikasi akan **otomatis berjalan** setelah instalasi selesai!
 
+### 🟢 BAB 1: Tutorial Instalasi Autocut
+**Tujuan:** Panduan khusus untuk melakukan instalasi aplikasi AutoCut pada sistem Android Anda.
 
-### 🟢 BAB 1: Instalasi dari Nol (The Onboarding)
-**Tujuan:** Panduan khusus untuk pemula yang belum pernah memakai Termux sama sekali.
-
-<p align="left">
-  <a href="https://youtu.be/kp3BpuPZwaw">
-    <img src="https://img.youtube.com/vi/ANIab701jhM/hqdefault.jpg" width="200" alt="Tutorial Part 1">
-  </a>
-  &nbsp; &nbsp;
-  <a href="https://youtu.be/ElI2P5Ksbqw">
-    <img src="https://img.youtube.com/vi/ElI2P5Ksbqw/hqdefault.jpg" width="200" alt="Tutorial Part 2">
-  </a>
-</p>
+<a href="https://youtu.be/Ju8fgioFD7Y">
+  <img src="https://img.youtube.com/vi/Ju8fgioFD7Y/hqdefault.jpg" width="300" alt="Tutorial Instalasi Autocut">
+</a>
 
 * Cara mengunduh Termux yang benar (Wajib dari link di atas, **bukan** PlayStore).
 * Cara *Copy-Paste* Skrip Setup 1 Baris ke dalam Termux.
 * Memberikan izin akses penyimpanan/Galeri dengan aman.
 * Cara membuka aplikasi menggunakan perintah global: `intisari menu` atau `intisari start`
 
-### ⬇️ BAB 2: Cara Mengunduh Video (YouTube & Sosmed)
-**Tujuan:** Membuktikan kecepatan unduh aplikasi dari berbagai platform.
+---
 
-<a href="https://youtu.be/v_81gg3zm2c">
-  <img src="https://img.youtube.com/vi/v_81gg3zm2c/hqdefault.jpg" width="300" alt="Cara Mengunduh Video">
+### ⚙️ BAB 2: Menu 4 Pengaturan Global
+**Tujuan:** Penjelasan detail mengenai penggunaan Menu 4 Pengaturan Global pada aplikasi.
+
+<a href="https://youtu.be/CsSjgV84X98">
+  <img src="https://img.youtube.com/vi/CsSjgV84X98/hqdefault.jpg" width="300" alt="Menu 4 Pengaturan Global">
 </a>
 
-* Cara menyalin link dari YouTube, TikTok, atau Instagram.
-* Memasukkan link ke menu *Downloader* di Termux.
-* Mengecek hasil unduhan yang otomatis masuk ke Galeri HP (tanpa perlu repot mencari folder berkat fitur *Async Media Scan*).
+* Cara melakukan konfigurasi pengaturan sistem.
+* Mengatur kualitas default video dan fitur Auto-Start Termux.
 
 ---
 
-### ✂️ BAB 3: Fitur Utama - Cara Memotong Video (Auto-Cut)
-**Tujuan:** Panduan menggunakan fitur unggulan pemotong otomatis (*Core Value*).
+### 🤖 BAB 3: Cara Gunakan Gemini Custom
+**Tujuan:** Panduan cara mengatur dan menggunakan integrasi Gemini Custom di dalam AutoCut.
 
-<a href="https://youtu.be/1f2LB4xkkwk">
-  <img src="https://img.youtube.com/vi/1f2LB4xkkwk/hqdefault.jpg" width="300" alt="Cara Memotong Video">
+<a href="https://youtu.be/XsLVc_JHc5U">
+  <img src="https://img.youtube.com/vi/XsLVc_JHc5U/hqdefault.jpg" width="300" alt="Cara Gunakan Gemini Custom">
 </a>
 
-* Cara menemukan file resep `.txt` yang dibuat otomatis oleh sistem.
-* Cara mengisi format waktu pemotongan yang benar (contoh: `00:00:10|00:00:30|Bagian_Lucu`).
-* Menjalankan menu "Processor / Potong Video" dan melihat FFmpeg memotong video dalam hitungan detik.
+* Cara memasukkan API Key Gemini milik Anda sendiri.
+* Menggunakan AI untuk kustomisasi pemrosesan video di AutoCut.
 
 ---
 
-### 🍪 BAB 4: JALUR VIP - Cara Memasang Cookies (SANGAT KRUSIAL!)
-**Tujuan:** Cara menembus pengamanan ketat YouTube (DRM/BotGuard). **Video paling wajib ditonton!**
+### 💎 BAB 4: Coba Trial Gratis 3 Hari
+**Tujuan:** Informasi dan langkah-langkah untuk mencoba lisensi trial gratis selama 3 hari.
 
-<a href="https://youtu.be/78t53O0MPZA">
-  <img src="https://img.youtube.com/vi/78t53O0MPZA/hqdefault.jpg" width="300" alt="Cara Memasang Cookies">
+<a href="https://youtube.com/shorts/G3Wk6TVxWSA">
+  <img src="https://img.youtube.com/vi/G3Wk6TVxWSA/hqdefault.jpg" width="200" alt="Coba Trial Gratis 3 Hari">
 </a>
 
-Untuk tahap ini, Anda membutuhkan ekstensi yang dipasang di dalam Kiwi Browser. Silakan klik tombol di bawah ini (pastikan Anda mengkliknya menggunakan aplikasi **Kiwi Browser** yang sudah diinstal di Tahap 1):
-
-[![Install Ekstensi Cookies](https://img.shields.io/badge/🧩_INSTALL-GET_COOKIES_LOCALLY-4285F4?style=for-the-badge)](https://chromewebstore.google.com/detail/get-cookiestxt-locally/cclelndahbckbenkjhflpdbgdldlbecc?pli=1)
-
-* Cara menggunakan aplikasi pendukung (Kiwi Browser).
-* Cara menginstal ekstensi dari link di atas ke dalam Kiwi Browser.
-* Login ke YouTube melalui Kiwi Browser dan mengekspor file `cookies.txt`.
-* Cara memindahkan file `cookies.txt` hasil download ke folder wajib: `/sdcard/INTISARI_DATA/cookies.txt` menggunakan File Manager HP.
-
----
-
-### 🚑 BAB 5: P3K Aplikasi (Troubleshooting & Auto-Healing)
-**Tujuan:** Solusi mandiri dan cepat jika terjadi *error* atau kendala saat penggunaan.
-
-<a href="https://youtube.com/shorts/ux0xEgPhERU">
-  <img src="https://img.youtube.com/vi/ux0xEgPhERU/hqdefault.jpg" width="300" alt="P3K Aplikasi">
-</a>
-
-* Apa yang harus dilakukan jika *download* gagal? (Cukup tekan Enter dengan tenang, jangan di-*refresh* paksa).
-* Cara menggunakan menu "Update Tools" di dalam aplikasi.
-* Cara menggunakan fitur "Update Paksa Keseluruhan (Force Sync)" jika aplikasi benar-benar macet.
+* Panduan aktivasi dan registrasi lisensi trial gratis secara langsung.
 
 ---
 
