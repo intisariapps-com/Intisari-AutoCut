@@ -77,19 +77,43 @@ pkg update -y && pkg install wget -y && wget -O install.sh https://raw.githubuse
 
 ---
 
-### 🤖 BAB 3: Cara Gunakan Gemini Custom
-**Tujuan:** Panduan cara mengatur dan menggunakan integrasi Gemini Custom di dalam AutoCut.
+### 📥 BAB 3: Fitur Nomor 1 & 2: Download & Potong Manual
+**Tujuan:** Menggunakan downloader bawaan untuk mengunduh video utuh dan memotong video lokal dari galeri.
 
-<a href="https://youtu.be/XsLVc_JHc5U">
-  <img src="https://img.youtube.com/vi/XsLVc_JHc5U/hqdefault.jpg" width="300" alt="Cara Gunakan Gemini Custom">
+<a href="https://youtu.be/bIV26LhFa0c">
+  <img src="https://img.youtube.com/vi/bIV26LhFa0c/hqdefault.jpg" width="300" alt="Fitur Nomor 1 & 2">
 </a>
 
-* Cara memasukkan API Key Gemini milik Anda sendiri.
-* Menggunakan AI untuk kustomisasi pemrosesan video di AutoCut.
+* Mengunduh video utuh dari link YouTube/TikTok menggunakan Opsi 1.
+* Memotong video galeri lokal menggunakan Opsi 2 dan file resep `.txt`.
 
 ---
 
-### 💎 BAB 4: Coba Trial Gratis 3 Hari
+### 🎬 BAB 4: Fitur Nomor 3: Download & Auto-Cut Viral
+**Tujuan:** Panduan memproses pemotongan video viral otomatis di Termux berdasarkan data dari Gemini.
+
+<a href="https://youtu.be/XsLVc_JHc5U">
+  <img src="https://img.youtube.com/vi/XsLVc_JHc5U/hqdefault.jpg" width="300" alt="Fitur Nomor 3">
+</a>
+
+* Memilih Opsi 3 untuk memotong video otomatis berdasarkan resep.
+* Cara kerja parser segmentasi video dari awal hingga akhir.
+
+---
+
+### 🤖 BAB 5: Panduan Analisis Gemini Custom
+**Tujuan:** Cara menganalisis video dengan Gemini Custom dan mengunduh format resep segmentasi viral.
+
+<a href="https://youtu.be/_1sAInXyiYU">
+  <img src="https://img.youtube.com/vi/_1sAInXyiYU/hqdefault.jpg" width="300" alt="Gemini Custom Analysis">
+</a>
+
+* Cara memasukkan link YouTube dan menulis perintah *prompt* wajib di Gemini.
+* Mengunduh file resep `.txt` segmentasi hasil dari AI ke folder Download HP.
+
+---
+
+### 💎 BAB 6: Coba Trial Gratis 3 Hari
 **Tujuan:** Informasi dan langkah-langkah untuk mencoba lisensi trial gratis selama 3 hari.
 
 <a href="https://youtube.com/shorts/G3Wk6TVxWSA">
