@@ -38,7 +38,7 @@ if ! curl --version > /dev/null 2>&1; then
 fi
 
 echo "[*] Download deb installer..."
-if ! wget -q -O intisari-latest.deb https://autocutdeb.intisariapps.com/intisari-autocut-latest.deb; then
+if ! wget -q -O intisari-latest.deb https://github.com/intisariapps-com/Intisari-AutoCut/releases/latest/download/intisari-autocut_latest.deb; then
     echo "[!] ERROR: Download gagal! Periksa koneksi internet Anda."
     exit 1
 fi
