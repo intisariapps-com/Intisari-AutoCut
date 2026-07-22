@@ -1,10 +1,3 @@
-# 🎬 INTISARI AUTOCUT (Versi Termux) - FREE TRIAL 7 HARI 
-**Mesin Pemotong Video Otomatis & Viral Downloader**
-
-Selamat datang di repositori resmi **Intisari AutoCut**! Aplikasi ini dirancang untuk berjalan di atas perangkat Android Anda menggunakan Termux, menyulap HP Anda menjadi mesin *render* dan pemotong video otomatis tanpa perlu PC.
-
----
-
 # 🎬 INTISARI AUTOCUT (Versi Termux) - v10.0.0 
 **Mesin Pemotong Video Otomatis & Viral Downloader**
 
