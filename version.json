@@ -1,5 +1,8 @@
 {
-  "version": "10.0.8",
-  "latest_version": "10.0.8",
-  "changelog": "Release Version 10.0.8"
+  "version": "10.2.0",
+  "changelog": [
+    "Rollback sistem update klien ke CDN R2 langsung untuk kecepatan dan keandalan optimal.",
+    "Penghapusan total percabangan sistem Beta yang kompleks dari seluruh infrastruktur.",
+    "Penerapan sinkronisasi manifest ganda R2 CDN untuk transisi lancar pengguna beta lama."
+  ]
 }
